@@ -1,14 +1,6 @@
-import fs from 'node:fs'
+import { createProblemFoldersWithName, createProblemFolders, fileReader } from "./Helper.js";
 
-const path = import.meta.dirname;
+createProblemFoldersWithName('Foo')
+// createProblemFolders()
 
-for (let i = 1; i < 25; i++) {
-    const dayPath = path + '/day ' + i;
-
-    if (fs.existsSync(dayPath)) break;
-
-    fs.mkdirSync(dayPath)
-
-    fs.mkdirSync(dayPath + '/problem 1')
-    fs.mkdirSync(dayPath + '/problem 2')
-}
+// fileReader()
