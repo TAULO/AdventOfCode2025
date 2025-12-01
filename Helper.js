@@ -24,14 +24,14 @@ export function createProblemFolders() {
     }
 }
 
-export function createProblemFoldersWithName(name, numOfProbloms = 2) {
+export function createProblemFoldersWithName(name, numOfProblems = 2) {
     const dayPath = path + `/${name}`;
 
     if (fs.existsSync(dayPath)) return
     fs.mkdirSync(dayPath)
 
     // create problems
-    for (let i = 1; i < (numOfProbloms + 1); i++) {
+    for (let i = 1; i < (numOfProblems + 1); i++) {
         const problemPath = dayPath + `/problem ${i}`;
         const indexPath = problemPath + '/index.js';
         const inputPath = problemPath + '/input.txt';
