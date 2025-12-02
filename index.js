@@ -1,6 +1,3 @@
 import { createProblemFoldersWithName, createProblemFolders, fileReader } from "./Helper.js";
 
-createProblemFoldersWithName('Foo')
-// createProblemFolders()
-
-// fileReader()
+createProblemFoldersWithName('Day 1: Secret Entrance');
