@@ -1,10 +1,10 @@
-import fs, { mkdir } from 'node:fs';
+import fs from 'node:fs';
 
 const path = import.meta.dirname;
 
 export function fileReader(file) {
     try {
-        return fs.readFile(file, { encoding: 'utf8' });
+        return fs.readFileSync(file, { encoding: 'utf8' });
     } catch (err) {
         console.error(err);
         return null;
@@ -34,10 +34,12 @@ export function createProblemFoldersWithName(name, numOfProblems = 2) {
     for (let i = 1; i < (numOfProblems + 1); i++) {
         const problemPath = dayPath + `/problem ${i}`;
         const indexPath = problemPath + '/index.js';
+        const testInputPath = problemPath + '/testInput.txt';
         const inputPath = problemPath + '/input.txt';
 
         fs.mkdirSync(problemPath);
         fs.writeFileSync(indexPath, '');
+        fs.writeFileSync(testInputPath, '');
         fs.writeFileSync(inputPath, '');
     }
 }
