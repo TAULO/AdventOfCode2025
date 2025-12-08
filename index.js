@@ -1,3 +1,3 @@
 import { createProblemFoldersWithName, createProblemFolders, fileReader } from "./Helper.js";
 
-createProblemFoldersWithName('Day 6: Trash Compactor');
+createProblemFoldersWithName('Day 7: Laboratories');
