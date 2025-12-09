@@ -1,29 +1,51 @@
 import { fileReader } from "../../Helper.js"
 
-const data = fileReader('testInput.txt')
+const data = fileReader('input.txt')
 
-// const rows = data.split('\n').map(str => str.trim().split(/\s/g).filter(Boolean));
-// const operations = rows[rows.length - 1];
+const lines = data.split('\n');
+const operationsRow = lines[lines.length - 1];
+const digitRows = lines.slice(0, -1);
 
-let res = 0;
+const maxLen = Math.max(...lines.map(l => l.length));
 
-const rows = data.split('\n').map(str => str.split(/\s/g));
+const paddedDigitRows = digitRows.map(r => r.padEnd(maxLen));
+const paddedOpsRow = operationsRow.padEnd(maxLen);
 
-console.log(rows)
+let problems = [];
+let currentNumbers = [];
 
-for (let i = 0; i < rows[0].length - 1; i++) {
-    for (let j = 0; j < rows.length - 1; j++) {
-        console.log(rows[j])
-
-        // const digit = rows[j][rows[j].length - 1];
-        // const lastDigit = digit[digit.length - 1];
-
-        // if (lastDigit) {
-        //     console.log(lastDigit)
-        // }
+for (let col = maxLen - 1; col >= 0; col--) {
+    let numStr = "";
+    for (let row = 0; row < paddedDigitRows.length; row++) {
+        const char = paddedDigitRows[row][col];
+        if (char && char !== ' ') {
+            numStr += char;
+        }
     }
 
-    break
+    if (numStr !== "") {
+        currentNumbers.push(parseInt(numStr));
+    }
+
+    const opChar = paddedOpsRow[col];
+
+    if (opChar === '+' || opChar === '*') {
+        if (currentNumbers.length > 0) {
+            problems.push({ numbers: currentNumbers, operator: opChar });
+            currentNumbers = [];
+        }
+    }
 }
 
-console.log(rows.length - 1, rows[0].length)
+let total = 0;
+for (const problem of problems) {
+    let result;
+    if (problem.operator === '+') {
+        result = problem.numbers.reduce((acc, n) => acc + n, 0);
+    } else {
+        result = problem.numbers.reduce((acc, n) => acc * n, 1);
+    }
+    total += result;
+}
+
+console.log(total);
